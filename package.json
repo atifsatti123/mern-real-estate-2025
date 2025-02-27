@@ -21,6 +21,7 @@
   "homepage": "https://github.com/atifsatti123/mern-real-estate-2025#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "js": "^0.1.0",

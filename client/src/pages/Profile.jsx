@@ -7,15 +7,15 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
-// import {
-//   updateUserStart,
-//   updateUserSuccess,
-//   updateUserFailure,
-//   deleteUserFailure,
-//   deleteUserStart,
-//   deleteUserSuccess,
-//   signOutUserStart,
-// } from "../redux/user/userSlice";
+import {
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
+  // deleteUserFailure,
+  // deleteUserStart,
+  // deleteUserSuccess,
+  // signOutUserStart,
+} from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 export default function Profile() {
@@ -94,72 +94,72 @@ export default function Profile() {
     }
   };
 
-  const handleDeleteUser = async () => {
-    try {
-      dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: "DELETE",
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(deleteUserFailure(data.message));
-        return;
-      }
-      dispatch(deleteUserSuccess(data));
-    } catch (error) {
-      dispatch(deleteUserFailure(error.message));
-    }
-  };
+  // const handleDeleteUser = async () => {
+  //   try {
+  //     dispatch(deleteUserStart());
+  //     const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+  //       method: "DELETE",
+  //     });
+  //     const data = await res.json();
+  //     if (data.success === false) {
+  //       dispatch(deleteUserFailure(data.message));
+  //       return;
+  //     }
+  //     dispatch(deleteUserSuccess(data));
+  //   } catch (error) {
+  //     dispatch(deleteUserFailure(error.message));
+  //   }
+  // };
 
-  const handleSignOut = async () => {
-    try {
-      dispatch(signOutUserStart());
-      const res = await fetch("/api/auth/signout");
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(deleteUserFailure(data.message));
-        return;
-      }
-      dispatch(deleteUserSuccess(data));
-    } catch (error) {
-      dispatch(deleteUserFailure(data.message));
-    }
-  };
+  // const handleSignOut = async () => {
+  //   try {
+  //     dispatch(signOutUserStart());
+  //     const res = await fetch("/api/auth/signout");
+  //     const data = await res.json();
+  //     if (data.success === false) {
+  //       dispatch(deleteUserFailure(data.message));
+  //       return;
+  //     }
+  //     dispatch(deleteUserSuccess(data));
+  //   } catch (error) {
+  //     dispatch(deleteUserFailure(data.message));
+  //   }
+  // };
 
-  const handleShowListings = async () => {
-    try {
-      setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
-      const data = await res.json();
-      if (data.success === false) {
-        setShowListingsError(true);
-        return;
-      }
+  // const handleShowListings = async () => {
+  //   try {
+  //     setShowListingsError(false);
+  //     const res = await fetch(`/api/user/listings/${currentUser._id}`);
+  //     const data = await res.json();
+  //     if (data.success === false) {
+  //       setShowListingsError(true);
+  //       return;
+  //     }
 
-      setUserListings(data);
-    } catch (error) {
-      setShowListingsError(true);
-    }
-  };
+  //     setUserListings(data);
+  //   } catch (error) {
+  //     setShowListingsError(true);
+  //   }
+  // };
 
-  const handleListingDelete = async (listingId) => {
-    try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: "DELETE",
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        console.log(data.message);
-        return;
-      }
+  // const handleListingDelete = async (listingId) => {
+  //   try {
+  //     const res = await fetch(`/api/listing/delete/${listingId}`, {
+  //       method: "DELETE",
+  //     });
+  //     const data = await res.json();
+  //     if (data.success === false) {
+  //       console.log(data.message);
+  //       return;
+  //     }
 
-      setUserListings((prev) =>
-        prev.filter((listing) => listing._id !== listingId)
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  //     setUserListings((prev) =>
+  //       prev.filter((listing) => listing._id !== listingId)
+  //     );
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -219,14 +219,14 @@ export default function Profile() {
         >
           {loading ? "Loading..." : "Update"}
         </button>
-        <Link
+        {/* <Link
           className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
           to={"/create-listing"}
         >
           Create Listing
-        </Link>
+        </Link> */}
       </form>
-      <div className="flex justify-between mt-5">
+      {/* <div className="flex justify-between mt-5">
         <span
           onClick={handleDeleteUser}
           className="text-red-700 cursor-pointer"
@@ -236,15 +236,15 @@ export default function Profile() {
         <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
           Sign out
         </span>
-      </div>
+      </div> */}
 
       <p className="text-red-700 mt-5">{error ? error : ""}</p>
       <p className="text-green-700 mt-5">
         {updateSuccess ? "User is updated successfully!" : ""}
       </p>
-      <button onClick={handleShowListings} className="text-green-700 w-full">
+      {/* <button onClick={handleShowListings} className="text-green-700 w-full">
         Show Listings
-      </button>
+      </button> */}
       <p className="text-red-700 mt-5">
         {showListingsError ? "Error showing listings" : ""}
       </p>

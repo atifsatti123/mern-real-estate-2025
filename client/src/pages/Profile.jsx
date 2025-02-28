@@ -14,7 +14,7 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
-  // signOutUserStart,
+  signOutUserStart,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -111,20 +111,20 @@ export default function Profile() {
     }
   };
 
-  // const handleSignOut = async () => {
-  //   try {
-  //     dispatch(signOutUserStart());
-  //     const res = await fetch("/api/auth/signout");
-  //     const data = await res.json();
-  //     if (data.success === false) {
-  //       dispatch(deleteUserFailure(data.message));
-  //       return;
-  //     }
-  //     dispatch(deleteUserSuccess(data));
-  //   } catch (error) {
-  //     dispatch(deleteUserFailure(data.message));
-  //   }
-  // };
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(data.message));
+    }
+  };
 
   // const handleShowListings = async () => {
   //   try {
@@ -233,9 +233,9 @@ export default function Profile() {
         >
           Delete account
         </span>
-        {/* <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
+        <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
           Sign out
-        </span> */}
+        </span>
       </div>
 
       <p className="text-red-700 mt-5">{error ? error : ""}</p>
